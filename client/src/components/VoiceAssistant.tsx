@@ -142,7 +142,7 @@ export default function VoiceAssistant() {
         date: new Date().toISOString().split('T')[0], // Today's date
         paymentMethod: proposedTx.paymentMethod || 'Cash'
       });
-      setSuccessMessage(`Saved! Created transaction "${proposedTx.description}" ($${Number(proposedTx.amount).toFixed(2)}) on Category "${proposedTx.category}".`);
+      setSuccessMessage(`Saved! Created transaction "${proposedTx.description}" (₹${Number(proposedTx.amount).toFixed(2)}) on Category "${proposedTx.category}".`);
       setProposedTx(null);
     } catch (err: any) {
       setError(err?.message || 'Failed to record expense.');

@@ -67,7 +67,7 @@ export default function Dashboard() {
   const formatCur = (v: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
       minimumFractionDigits: 2,
     }).format(v);
   };
@@ -537,7 +537,7 @@ export default function Dashboard() {
                         borderColor: '#f1f5f9',
                         fontSize: '11px',
                       }}
-                      formatter={(v) => [`$${v}`, 'Spent']}
+                      formatter={(v) => [`₹${v}`, 'Spent']}
                     />
                   </PieChart>
                 </ResponsiveContainer>
@@ -548,7 +548,7 @@ export default function Dashboard() {
               )}
               <div className="absolute flex flex-col items-center">
                 <span className="text-[9px] text-slate-400 uppercase font-bold tracking-widest">Oct Total</span>
-                <span className="text-sm font-black text-slate-950 dark:text-neutral-50">${metrics.expense.toFixed(0)}</span>
+                <span className="text-sm font-black text-slate-950 dark:text-neutral-50">₹{metrics.expense.toFixed(0)}</span>
               </div>
             </div>
 
@@ -600,7 +600,7 @@ export default function Dashboard() {
                 <div className="flex justify-between text-xs font-bold text-slate-800 dark:text-neutral-200">
                   <span className="truncate">{b.category}</span>
                   <span className="text-[10px] text-slate-400">
-                    ${b.spent.toFixed(0)} / ${b.limit || '—'}
+                    ₹{b.spent.toFixed(0)} / ₹{b.limit || '—'}
                   </span>
                 </div>
 
@@ -738,7 +738,7 @@ export default function Dashboard() {
 
                       {/* Amount */}
                       <div className="space-y-1">
-                        <label className="text-xs font-semibold text-slate-700 dark:text-neutral-300">Amount Paid (USD)</label>
+                        <label className="text-xs font-semibold text-slate-700 dark:text-neutral-300">Amount Paid (INR)</label>
                         <input
                           type="number"
                           step="0.01"
@@ -858,7 +858,7 @@ export default function Dashboard() {
                   <div key={category} className="flex items-center justify-between gap-4">
                     <span className="text-xs font-bold text-slate-700 dark:text-neutral-300">{category}</span>
                     <div className="relative w-36">
-                      <span className="absolute left-3.5 top-1.5 text-slate-400 text-xs">$</span>
+                      <span className="absolute left-3.5 top-1.5 text-slate-400 text-xs">₹</span>
                       <input
                         type="number"
                         value={editedBudgets[category] ?? 0}

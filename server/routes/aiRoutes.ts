@@ -157,7 +157,15 @@ router.post('/parse-voice-command', authenticateToken, async (req: Request, res:
 
   try {
     const ai = getGeminiClient();
-    const prompt = `You are an intelligent voice assistant for SmartSpend (a personal finance tracker).
+    const prompt = `You are an Indian Personal Finance AI.
+
+Currency Formatting Rules:
+1. The default currency is Indian Rupees (INR).
+2. Always display amounts with the "₹" symbol.
+3. Never use "$", "USD", or any other currency symbol unless the user explicitly requests it.
+4. Keep numeric values unchanged unless a currency conversion is requested.
+5. Every financial response (budgets, expenses, warnings, analytics, charts, summaries, recommendations) must use ₹.
+
 The user has spoken a voice command to find, analyze, or register financial ledger records.
 Here is the raw speech transcript from the user: "${query}"
 
@@ -165,16 +173,16 @@ Here are the user's current transaction records (the current year is 2026):
 ${JSON.stringify(transactions || [], null, 2)}
 
 Analyze the user's spoken command and choose ONE of these actions:
-1. "filter": If the user wants to fetch, see, list, query, or summarize transactions (e.g. "show me my food expenses", "how much did I spend on Shopping?", "any transactions over $100?", "what did I buy at walmart?").
+1. "filter": If the user wants to fetch, see, list, query, or summarize transactions (e.g. "show me my food expenses", "how much did I spend on Shopping?", "any transactions over ₹100?", "what did I buy at walmart?").
    In this case, find all transaction IDs in the provided transactions list that match the user's intent, and write a friendly summary answer.
-2. "add": If the user wants to record/register/save a new transaction (e.g. "add $15.50 for lunch on Food", "record income of $500 for consulting").
+2. "add": If the user wants to record/register/save a new transaction (e.g. "add ₹15.50 for lunch on Food", "record income of ₹500 for consulting").
    In this case, extract details for the "newTransaction" field.
 3. "none": If the user spoken command is not finance-related or is unclear.
 
 For category fields: map them ONLY to one of: 'Food', 'Housing', 'Entertainment', 'Utilities', 'Transportation', 'Shopping', or 'Other'.
 For paymentMethod: map to 'UPI', 'Cash', or 'Card' (default to 'Cash' if not specified).
 
-Respond with a JSON object matching this schema. Provide ONLY the JSON.`;
+Respond with a JSON object matching this schema. When summarizing amounts, always use the Indian Rupee symbol (₹). Provide ONLY the JSON.`;
 
     const response = await generateContentWithRetry(ai, {
       contents: [
@@ -223,7 +231,9 @@ Respond with a JSON object matching this schema. Provide ONLY the JSON.`;
       }
     });
 
-    const parsedJson = JSON.parse(response.text || '{}');
+    let responseText = response.text || '{}';
+    responseText = responseText.replace(/\$/g, '₹');
+    const parsedJson = JSON.parse(responseText);
     res.json({ data: parsedJson });
   } catch (error: any) {
     console.error('Error parsing voice command:', error);
@@ -237,7 +247,7 @@ function generateStaticAdvisorInsights(transactions: any[], budgets: any[], budg
     .map((b: any) => ({
       category: b.category,
       status: b.percentage >= 100 ? 'danger' : 'warning',
-      message: `You spent $${Number(b.spent).toFixed(2)} on "${b.category}" which is ${Number(b.percentage).toFixed(0)}% of your monthly $${Number(b.limit).toFixed(0)} limit.`
+      message: `You spent ₹${Number(b.spent).toFixed(2)} on "${b.category}" which is ${Number(b.percentage).toFixed(0)}% of your monthly ₹${Number(b.limit).toFixed(0)} limit.`
     }));
 
   const savingTips = [
@@ -271,14 +281,14 @@ function generateStaticAdvisorInsights(transactions: any[], budgets: any[], budg
     lowBudgets,
     savingTips,
     weeklyAnalysis: {
-      summary: `Your spending totals $${totalExpense.toFixed(2)} vs an income of $${totalIncome.toFixed(2)}. ${topCategory !== 'None' ? `Your primary category of expense is "${topCategory}".` : ''}`,
+      summary: `Your spending totals ₹${totalExpense.toFixed(2)} vs an income of ₹${totalIncome.toFixed(2)}. ${topCategory !== 'None' ? `Your primary category of expense is "${topCategory}".` : ''}`,
       topExpenseCategory: topCategory,
       advice: topCategory !== 'None' ? `Consider reducing discretionary transactions under "${topCategory}" to build savings.` : "Set up savings goals to track your growth."
     },
     monthlyAnalysis: {
-      summary: `This month, your net wealth flow is $${netSavings.toFixed(2)} with an estimated savings rate of ${savingsRate.toFixed(1)}%.`,
+      summary: `This month, your net wealth flow is ₹${netSavings.toFixed(2)} with an estimated savings rate of ${savingsRate.toFixed(1)}%.`,
       savingsForecast: netSavings > 0 
-        ? `If current trends continue, you are on track to save $${netSavings.toFixed(2)} by the end of the month.` 
+        ? `If current trends continue, you are on track to save ₹${netSavings.toFixed(2)} by the end of the month.` 
         : "Your current expenses exceed your income. Try setting smaller budget targets for major categories."
     },
     isFallback: true
@@ -290,7 +300,15 @@ router.post('/insights-advisor', authenticateToken, async (req: Request, res: Re
 
   try {
     const ai = getGeminiClient();
-    const prompt = `You are a professional AI Personal Finance Advisor & Wealth Coach for SmartSpend.
+    const prompt = `You are an Indian Personal Finance AI.
+
+Currency Formatting Rules:
+1. The default currency is Indian Rupees (INR).
+2. Always display amounts with the "₹" symbol.
+3. Never use "$", "USD", or any other currency symbol unless the user explicitly requests it.
+4. Keep numeric values unchanged unless a currency conversion is requested.
+5. Every financial response (budgets, expenses, warnings, analytics, charts, summaries, recommendations) must use ₹.
+
 Analyze the user's spending habits, budgets, and standard categories to generate specific, high-value, personalized advice.
 The current date is June 2026.
 
@@ -317,7 +335,7 @@ Your response MUST be structured JSON with these exact properties:
    - "summary" (string: progress check for the overall month, net flow, saving rate estimate)
    - "savingsForecast" (string: realistic savings projection for this month if current trends continue)
 
-Ensure your advice is action-oriented, precise, uses real numbers from the data, and avoids vague or dry template text. Do not output anything except the JSON object.`;
+Ensure your advice is action-oriented, precise, uses real numbers from the data, and avoids vague or dry template text. Output all currency amounts using the Indian Rupee symbol (₹). Do not output anything except the JSON object.`;
 
     const response = await generateContentWithRetry(ai, {
       contents: [
@@ -367,7 +385,9 @@ Ensure your advice is action-oriented, precise, uses real numbers from the data,
       }
     });
 
-    const parsedJson = JSON.parse(response.text || '{}');
+    let responseText = response.text || '{}';
+    responseText = responseText.replace(/\$/g, '₹');
+    const parsedJson = JSON.parse(responseText);
     res.json({ data: parsedJson });
   } catch (error: any) {
     console.warn('[AI-Insights] Gemini error occurred, falling back to local analytics:', error?.message || error);

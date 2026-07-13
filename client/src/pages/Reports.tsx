@@ -200,9 +200,9 @@ export default function Reports() {
 
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(9);
-      doc.text(`Total Income: $${reportMetrics.totalIncome.toFixed(2)}`, leftMargin + 5, 64);
-      doc.text(`Total Expenses: $${reportMetrics.totalExpense.toFixed(2)}`, leftMargin + 5, 70);
-      doc.text(`Net Wealth Flow: $${reportMetrics.netSavings.toFixed(2)}`, leftMargin + 90, 64);
+      doc.text(`Total Income: Rs. ${reportMetrics.totalIncome.toFixed(2)}`, leftMargin + 5, 64);
+      doc.text(`Total Expenses: Rs. ${reportMetrics.totalExpense.toFixed(2)}`, leftMargin + 5, 70);
+      doc.text(`Net Wealth Flow: Rs. ${reportMetrics.netSavings.toFixed(2)}`, leftMargin + 90, 64);
       doc.text(`Savings Rate: ${reportMetrics.savingsRate.toFixed(1)}%`, leftMargin + 90, 70);
 
       // 3. Transactions Table Header
@@ -267,13 +267,13 @@ export default function Reports() {
         const cleanDesc = t.description.length > 30 ? t.description.substring(0, 28) + '..' : t.description;
         doc.text(cleanDesc, leftMargin + 25, yPosition);
         doc.text(t.category, leftMargin + 85, yPosition);
-        doc.text(t.paymentMethod || 'Cash', leftMargin + 115, yPosition);
+        doc.text(t.paymentMethod === 'UPI font-semibold' ? 'UPI' : (t.paymentMethod || 'Cash'), leftMargin + 115, yPosition);
         doc.text(t.type === 'income' ? 'INCOME' : 'EXPENSE', leftMargin + 140, yPosition);
 
         // Print amount with proper color
         doc.setTextColor(color[0], color[1], color[2]);
         doc.setFont('helvetica', 'bold');
-        doc.text(`$${amt.toFixed(2)}`, leftMargin + 165, yPosition);
+        doc.text(`Rs. ${amt.toFixed(2)}`, leftMargin + 165, yPosition);
         
         doc.setTextColor(30, 41, 59);
         doc.setFont('helvetica', 'normal');
@@ -298,7 +298,7 @@ export default function Reports() {
         'Category': t.category,
         'Payment Method': t.paymentMethod || 'Cash',
         'Record Type': t.type.toUpperCase(),
-        'Amount (USD)': t.amount,
+        'Amount (INR)': t.amount,
       }));
 
       // Summaries array to append at the bottom
@@ -671,19 +671,19 @@ export default function Reports() {
                 <div>
                   <span className="text-[10px] text-slate-400 block font-bold">Statement Income</span>
                   <span className="text-sm font-extrabold text-emerald-500">
-                    ${reportMetrics.totalIncome.toFixed(2)}
+                    ₹{reportMetrics.totalIncome.toFixed(2)}
                   </span>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block font-bold">Statement Expenses</span>
                   <span className="text-sm font-extrabold text-rose-500">
-                    ${reportMetrics.totalExpense.toFixed(2)}
+                    ₹{reportMetrics.totalExpense.toFixed(2)}
                   </span>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block font-bold">Net Flow</span>
                   <span className={`text-sm font-extrabold ${reportMetrics.netSavings >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
-                    ${reportMetrics.netSavings.toFixed(2)}
+                    ₹{reportMetrics.netSavings.toFixed(2)}
                   </span>
                 </div>
                 <div>

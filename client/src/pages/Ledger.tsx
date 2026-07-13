@@ -152,7 +152,10 @@ export default function Ledger() {
       if (filterCategory !== 'all' && t.category !== filterCategory) return false;
 
       // 4. Payment Method
-      if (filterPayment !== 'all' && t.paymentMethod !== filterPayment) return false;
+      if (filterPayment !== 'all') {
+        const actualMethod = t.paymentMethod === 'UPI font-semibold' ? 'UPI' : t.paymentMethod;
+        if (actualMethod !== filterPayment) return false;
+      }
 
       // 5. Date Boundaries
       if (filterDateFrom && t.date < filterDateFrom) return false;
@@ -178,7 +181,7 @@ export default function Ledger() {
   const formatCur = (v: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'INR',
     }).format(v);
   };
 
@@ -211,7 +214,7 @@ export default function Ledger() {
       'Type': t.type.toUpperCase(),
       'Category': t.category,
       'Payment Method': t.paymentMethod,
-      'Amount ($)': t.amount,
+      'Amount (INR)': t.amount,
     }));
     
     const ws = XLSX.utils.json_to_sheet(data);
@@ -307,7 +310,7 @@ export default function Ledger() {
       
       doc.setTextColor(71, 85, 105);
       doc.text(t.category, 125, currentY + 4.5);
-      doc.text(t.paymentMethod, 155, currentY + 4.5);
+      doc.text(t.paymentMethod === 'UPI font-semibold' ? 'UPI' : t.paymentMethod, 155, currentY + 4.5);
 
       doc.setFont('helvetica', 'bold');
       if (t.type === 'income') {
@@ -315,7 +318,7 @@ export default function Ledger() {
       } else {
         doc.setTextColor(30, 41, 59);
       }
-      doc.text(`$${t.amount.toFixed(2)}`, 180, currentY + 4.5);
+      doc.text(`Rs. ${t.amount.toFixed(2)}`, 180, currentY + 4.5);
       doc.setFont('helvetica', 'normal');
 
       currentY += 6.5;
@@ -342,11 +345,11 @@ export default function Ledger() {
     
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.text(`Total Inflow Credits:  $${totalIncome.toFixed(2)}`, 20, currentY + 14);
-    doc.text(`Total Outflow Debits: $${totalExpense.toFixed(2)}`, 20, currentY + 20);
+    doc.text(`Total Inflow Credits:  Rs. ${totalIncome.toFixed(2)}`, 20, currentY + 14);
+    doc.text(`Total Outflow Debits: Rs. ${totalExpense.toFixed(2)}`, 20, currentY + 20);
 
     doc.setFont('helvetica', 'bold');
-    doc.text(`Net Impact: $${netSavings.toFixed(2)}`, 110, currentY + 14);
+    doc.text(`Net Impact: Rs. ${netSavings.toFixed(2)}`, 110, currentY + 14);
 
     doc.setFontSize(8);
     doc.setTextColor(148, 163, 184);
@@ -522,7 +525,7 @@ export default function Ledger() {
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wide">Amount (USD)</label>
+                    <label className="text-[10px] font-bold text-slate-400 dark:text-neutral-500 uppercase tracking-wide">Amount (INR)</label>
                     <input
                       type="number"
                       step="0.01"
@@ -601,10 +604,10 @@ export default function Ledger() {
                         setFormDesc('');
                         setFormAmount('');
                         if (formType !== 'expense') {
-                          alert('Ledger entry added successfully!');
+                          console.log('Ledger entry added successfully!');
                         }
                       } catch (err: any) {
-                        alert(err.message || 'Validation error');
+                        console.log(err.message || 'Validation error');
                       }
                     }}
                     className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-[0.98]"
@@ -694,8 +697,9 @@ export default function Ledger() {
               <input
                 type="date"
                 value={filterDateFrom}
+                onClick={(e) => { try { (e.target as HTMLInputElement).showPicker(); } catch (err) {} }}
                 onChange={e => { setFilterDateFrom(e.target.value); setCurrentPage(1); }}
-                className="w-full pl-8 pr-3 py-2 border border-slate-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-950 font-semibold text-slate-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
+                className="w-full pl-8 pr-3 py-2 border border-slate-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-950 font-semibold text-slate-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all cursor-pointer"
               />
               <Calendar className="absolute left-2.5 top-3.5 h-3.5 w-3.5 text-slate-400 pointer-events-none" />
             </div>
@@ -708,8 +712,9 @@ export default function Ledger() {
               <input
                 type="date"
                 value={filterDateTo}
+                onClick={(e) => { try { (e.target as HTMLInputElement).showPicker(); } catch (err) {} }}
                 onChange={e => { setFilterDateTo(e.target.value); setCurrentPage(1); }}
-                className="w-full pl-8 pr-3 py-2 border border-slate-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-950 font-semibold text-slate-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all"
+                className="w-full pl-8 pr-3 py-2 border border-slate-200 dark:border-neutral-800 rounded-xl bg-white dark:bg-neutral-950 font-semibold text-slate-900 dark:text-neutral-100 focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-500 outline-none transition-all cursor-pointer"
               />
               <Calendar className="absolute left-2.5 top-3.5 h-3.5 w-3.5 text-slate-400 pointer-events-none" />
             </div>
@@ -774,7 +779,7 @@ export default function Ledger() {
                     <td className="px-6 py-4 text-slate-500 dark:text-neutral-400 font-semibold">
                       <div className="flex items-center gap-1.5">
                         <CreditCard className="h-3.5 w-3.5 text-slate-400" />
-                        {t.paymentMethod}
+                        {t.paymentMethod === 'UPI font-semibold' ? 'UPI' : t.paymentMethod}
                       </div>
                     </td>
 
@@ -931,7 +936,7 @@ export default function Ledger() {
 
                 {/* Amount */}
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700 dark:text-neutral-300">Amount Paid (USD)</label>
+                  <label className="text-xs font-semibold text-slate-700 dark:text-neutral-300">Amount Paid (INR)</label>
                   <input
                     type="number"
                     step="0.01"

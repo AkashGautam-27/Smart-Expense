@@ -256,12 +256,12 @@ export function TransactionProvider({ children }: { children: ReactNode }) {
     if (ratio >= 1.0) {
       setBudgetAlerts(prev => [
         ...prev,
-        `⚠️ Over Limit! You have spent $${totalSpent.toFixed(2)} on "${category}" which is ${((ratio) * 100).toFixed(0)}% of your monthly $${bObj.limit} budget limit.`
+        `⚠️ Over Limit! You have spent ₹${totalSpent.toFixed(2)} on "${category}" which is ${((ratio) * 100).toFixed(0)}% of your monthly ₹${bObj.limit} budget limit.`
       ]);
     } else if (ratio >= 0.8) {
       setBudgetAlerts(prev => [
         ...prev,
-        `🚨 High Consumption Warning! You have spent $${totalSpent.toFixed(2)} on "${category}", utilizing over ${((ratio) * 100).toFixed(0)}% of your monthly $${bObj.limit} limit.`
+        `🚨 High Consumption Warning! You have spent ₹${totalSpent.toFixed(2)} on "${category}", utilizing over ${((ratio) * 100).toFixed(0)}% of your monthly ₹${bObj.limit} limit.`
       ]);
     }
   };
