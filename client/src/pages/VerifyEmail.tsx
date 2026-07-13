@@ -78,7 +78,7 @@ export default function VerifyEmail() {
               Verify Your Email
             </h1>
             <p className="text-slate-500 dark:text-neutral-400 text-sm max-w-sm">
-              We've dispatched an email containing a 6-digit verification OTP code to:
+              We've send an email containing a 6-digit verification OTP code to:
             </p>
             <p className="font-semibold text-slate-800 dark:text-neutral-200 text-sm bg-slate-50 dark:bg-neutral-950/60 py-1.5 px-3 rounded-lg inline-block border border-slate-100 dark:border-neutral-850">
               {authState.user?.email}
@@ -147,7 +147,7 @@ export default function VerifyEmail() {
             className="text-rose-500 hover:text-rose-600 hover:underline flex items-center gap-1.5 cursor-pointer"
           >
             <LogOut className="h-3.5 w-3.5" />
-            Sign Out / Exit
+            Sign Out
           </button>
         </div>
       </motion.div>

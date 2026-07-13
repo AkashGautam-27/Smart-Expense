@@ -313,7 +313,7 @@ export default function Dashboard() {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 dark:border-neutral-800 pb-5">
         <div>
-          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest font-heading mb-1 block">Console Workspace</span>
+          
           <h1 className="text-3xl font-extrabold text-slate-950 dark:text-neutral-50 font-heading tracking-tight">
             Financial Analytics
           </h1>

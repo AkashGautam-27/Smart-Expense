@@ -878,13 +878,13 @@ export default function Admin() {
                 
                 <div>
                   <h3 className="text-sm font-extrabold text-slate-800 dark:text-neutral-200">
-                    Purge User & Financial Records?
+                    Delete User & Financial Records?
                   </h3>
                   <p className="text-xs text-slate-400 mt-2 leading-relaxed">
                     You are about to delete user <strong className="text-slate-700 dark:text-neutral-300 font-bold">{selectedUser.name}</strong> ({selectedUser.email}).
                   </p>
                   <p className="text-[11px] text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/20 p-2.5 rounded-xl border border-amber-100 dark:border-amber-950/30 mt-3">
-                    <strong>CRITICAL WARNING:</strong> This action is irreversible. All associated <strong>budgets, categories, and transaction history</strong> will be permanently deleted from the database.
+                    <strong>CRITICAL WARNING:</strong> This action is dangerous. All associated <strong>budgets, categories, and transaction history</strong> will be permanently deleted from the database.
                   </p>
                 </div>
 
@@ -894,7 +894,7 @@ export default function Admin() {
                     onClick={() => setIsDeleteModalOpen(false)}
                     className="py-2 px-4 border border-slate-100 dark:border-neutral-800 dark:text-neutral-300 rounded-xl text-xs font-bold cursor-pointer hover:bg-slate-50 dark:hover:bg-neutral-950"
                   >
-                    Cancel and Keep
+                    Cancel 
                   </button>
                   <button
                     type="button"
@@ -903,7 +903,7 @@ export default function Admin() {
                     className="py-2 px-4 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold shadow-md cursor-pointer flex items-center gap-1.5"
                   >
                     {formLoading && <Loader2 className="h-3 w-3 animate-spin" />}
-                    Delete & Purge Data
+                    Delete 
                   </button>
                 </div>
               </div>

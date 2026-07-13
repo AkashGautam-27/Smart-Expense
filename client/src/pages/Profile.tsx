@@ -318,7 +318,7 @@ export default function Profile() {
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-slate-400 dark:text-neutral-500 flex items-center gap-1.5">
                   <Mail className="h-3.5 w-3.5 text-slate-500" />
-                  <span>Email Identity (Locked)</span>
+                  <span>Email Identity</span>
                 </label>
                 <input
                   type="email"
@@ -327,7 +327,7 @@ export default function Profile() {
                   className="w-full px-3.5 py-2 bg-slate-100/75 dark:bg-neutral-900/40 border border-slate-200/50 dark:border-neutral-800/50 rounded-xl text-xs text-slate-400 dark:text-neutral-500 cursor-not-allowed select-all"
                 />
                 <p className="text-[10px] text-slate-400 dark:text-neutral-500">
-                  Your registered email address is used for secure logins and password recovery.
+                  Your registered email address is used for secure logins.
                 </p>
               </div>
 
@@ -342,7 +342,7 @@ export default function Profile() {
                   type="tel"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  placeholder="e.g. +91 98765 43210"
+                  placeholder="e.g. +91 0000000000"
                   className="w-full px-3.5 py-2 bg-slate-50 dark:bg-neutral-950 border border-slate-200 dark:border-neutral-800 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-hidden focus:ring-1 focus:ring-indigo-650 focus:border-indigo-650 dark:focus:ring-indigo-400"
                 />
               </div>

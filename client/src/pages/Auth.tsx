@@ -67,7 +67,7 @@ export default function Auth() {
         </div>
 
         <div className="my-12 md:my-0 max-w-md relative z-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold font-sans leading-tight tracking-tight bg-gradient-to-r from-neutral-100 via-white to-slate-200">
+          <h2 className="text-3xl md:text-4xl font-extrabold font-sans leading-tight tracking-tight bg-gradient-to-r from-indigo-500/ via-gray to-indigo-950/">
             Automate and Optimize Your Financial Horizon
           </h2>
           <p className="text-slate-400 mt-4 leading-relaxed font-sans text-sm">
@@ -114,7 +114,7 @@ export default function Auth() {
         </div>
 
         <div className="text-slate-500 text-xs relative z-10 font-sans border-t border-slate-800 pt-6 mt-6 md:mt-0">
-          Powered by Gemini 3.5 &bull; Safe Full-Stack Architecture
+           &bull; Safe Full-Stack Architecture
         </div>
       </div>
 
@@ -207,21 +207,9 @@ export default function Auth() {
             </button>
           </form>
 
-          <div className="relative flex py-2 items-center">
-            <div className="flex-grow border-t border-slate-200 dark:border-neutral-800"></div>
-            <span className="flex-shrink mx-4 text-xs font-sans text-slate-400">Or continue with</span>
-            <div className="flex-grow border-t border-slate-200 dark:border-neutral-800"></div>
-          </div>
+         
 
-          <button
-            id="demo_quick_login"
-            onClick={handleDemoAccess}
-            disabled={formLoading}
-            className="w-full py-2.5 px-4 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-emerald-700 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/40 dark:border-emerald-900/30 dark:text-emerald-400 rounded-xl font-medium flex items-center justify-center gap-2 text-sm transition-all cursor-pointer"
-          >
-            <Sparkles className="h-4 w-4" />
-            Quick Access Demo Account
-          </button>
+         
 
           <div className="text-center font-sans">
             <button
@@ -232,7 +220,7 @@ export default function Auth() {
                 setValidationError(null);
                 setShowPassword(false);
               }}
-              className="text-xs text-indigo-600 hover:text-indigo-700 hover:underline font-medium dark:text-indigo-400 cursor-pointer"
+              className="text-xs text-indigo-600 hover:text-indigo-700 hover:font-medium dark:text-indigo-400 cursor-pointer"
             >
               {isLogin ? "Don't have an account yet? Sign up" : 'Already have an account? Sign in'}
             </button>

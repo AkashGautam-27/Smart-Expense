@@ -387,7 +387,7 @@ export default function Reports() {
           ) : (
             <RefreshCw className="h-3.5 w-3.5" />
           )}
-          Re-Analyze Ledger with AI
+          Re-Analyze with AI
         </button>
       </div>
 
@@ -416,7 +416,7 @@ export default function Reports() {
               <div className="flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-indigo-500 animate-pulse" />
                 <h3 className="text-sm font-bold text-slate-950 dark:text-neutral-100">
-                  Gemini AI Budget Coach & Wealth Advisor
+                  AI Budget Coach & Wealth Advisor
                 </h3>
               </div>
               <span className="text-[10px] font-bold bg-indigo-50 text-indigo-600 dark:bg-indigo-950/30 dark:text-indigo-400 px-2.5 py-1 rounded-full border border-indigo-100 dark:border-indigo-900/30">
@@ -429,7 +429,7 @@ export default function Reports() {
               <div className="py-20 flex flex-col items-center justify-center text-center space-y-3.5">
                 <Loader className="h-9 w-9 text-indigo-600 animate-spin" />
                 <p className="text-xs font-bold text-slate-800 dark:text-neutral-200">
-                  Gemini is auditing your expenses ledger...
+                  AI is auditing your expenses ledger...
                 </p>
                 <p className="text-[11px] text-slate-400 max-w-xs">
                   Reviewing budget ceilings, payment methods, transaction volumes, and forecasting net savings.
@@ -468,7 +468,7 @@ export default function Reports() {
                     <div>
                       <span className="font-bold">Local Analysis Mode</span>
                       <p className="text-slate-600 dark:text-neutral-400 mt-0.5 leading-relaxed font-medium">
-                        The Gemini AI service is temporarily rate-limited (Quota Exceeded). Displaying local rule-based financial insights.
+                        The AI service is temporarily rate-limited (Quota Exceeded). Displaying local rule-based financial insights.
                       </p>
                     </div>
                   </div>
@@ -568,7 +568,7 @@ export default function Reports() {
 
                 {/* Footnote */}
                 <div className="text-[10px] text-slate-400 text-center font-bold">
-                  Last updated via Gemini: {new Date().toLocaleTimeString()}
+                  Last updated via AI : {new Date().toLocaleTimeString()}
                 </div>
 
               </div>
@@ -609,7 +609,7 @@ export default function Reports() {
                     className={`p-2 rounded-xl text-left text-xs font-semibold border transition-all cursor-pointer ${
                       reportRange === preset.id
                         ? 'bg-indigo-50 border-indigo-200 text-indigo-700 dark:bg-indigo-950/30 dark:border-indigo-900/50 dark:text-indigo-400'
-                        : 'bg-white border-slate-150 hover:bg-slate-50 text-slate-600 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-850'
+                        : 'bg-white border-slate-150 hover:bg-slate-50 text-slate-600 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:text-black dark:hover:bg-neutral-850'
                     }`}
                   >
                     {preset.name}
@@ -721,7 +721,7 @@ export default function Reports() {
                   id="export_btn_excel"
                   onClick={handleExportExcel}
                   disabled={reportMetrics.count === 0}
-                  className="py-3 px-3.5 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-700 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-850 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="py-3 px-3.5 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-700 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-natural-300 hover:text-black rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download className="h-4 w-4 shrink-0 text-emerald-500" />
                   Export Excel (XLSX)
@@ -732,7 +732,7 @@ export default function Reports() {
                   id="export_btn_csv"
                   onClick={handleExportCSV}
                   disabled={reportMetrics.count === 0}
-                  className="py-3 px-3.5 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-700 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-850 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="py-3 px-3.5 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-700 dark:bg-neutral-950 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-850 hover:text-black rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Download className="h-4 w-4 shrink-0 text-amber-500" />
                   Export Raw CSV

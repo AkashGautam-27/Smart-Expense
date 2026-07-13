@@ -40,6 +40,7 @@ export default function Ledger() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTx, setEditingTx] = useState<Transaction | null>(null);
   const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
+  const [deletingTx, setDeletingTx] = useState<{id: string, description: string} | null>(null);
 
   // Form Fields
   const [formDesc, setFormDesc] = useState('');
@@ -118,13 +119,17 @@ export default function Ledger() {
     }
   };
 
-  const handleDelete = async (id: string, description: string) => {
-    if (confirm(`Are you sure you want to delete "${description}" transaction log?`)) {
-      try {
-        await deleteTransaction(id);
-      } catch (err) {
-        alert('Failed to delete transaction.');
-      }
+  const handleDelete = (id: string, description: string) => {
+    setDeletingTx({ id, description });
+  };
+
+  const confirmDelete = async () => {
+    if (!deletingTx) return;
+    try {
+      await deleteTransaction(deletingTx.id);
+      setDeletingTx(null);
+    } catch (err) {
+      console.log('Failed to delete transaction.');
     }
   };
 
@@ -462,11 +467,11 @@ export default function Ledger() {
             </div>
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-neutral-500 block">Ledger Creator</span>
-              <h3 className="text-sm font-extrabold text-slate-900 dark:text-neutral-100">Live Collapsible Quick Add Section</h3>
+              <h3 className="text-sm font-extrabold text-slate-900 dark:text-neutral-100">Add entry Section</h3>
             </div>
           </div>
           <div className="flex items-center gap-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
-            <span>{isQuickAddOpen ? "Hide direct builder" : "Toggle Quick Add Direct Input"}</span>
+            <span>{isQuickAddOpen ? "Hide" : "Quick Add Direct Input"}</span>
             <motion.div
               animate={{ rotate: isQuickAddOpen ? 180 : 0 }}
               transition={{ duration: 0.2 }}
@@ -612,7 +617,7 @@ export default function Ledger() {
                     }}
                     className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shadow-xs active:scale-[0.98]"
                   >
-                    <Plus className="h-4.5 w-4.5" /> Commit Ledger Entry
+                    <Plus className="h-4.5 w-4.5" /> Ledger Entry
                   </button>
                 </div>
               </div>
@@ -1011,10 +1016,61 @@ export default function Ledger() {
                     type="submit"
                     className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl text-xs font-bold cursor-pointer transition-all"
                   >
-                    {editingTx ? 'Confirm Updates' : 'Commit Ledger Entry'}
+                    {editingTx ? 'Confirm Updates' : 'Add Ledger Entry'}
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {deletingTx && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 font-sans"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+              className="bg-white dark:bg-neutral-900 rounded-2xl border border-slate-100 dark:border-neutral-800 shadow-xl w-full max-w-sm p-6 relative overflow-hidden flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-neutral-800">
+                <h3 className="text-base font-bold text-slate-900 dark:text-neutral-100">
+                  Confirm Deletion
+                </h3>
+                <button
+                  onClick={() => setDeletingTx(null)}
+                  className="p-1 text-slate-400 hover:text-slate-600 dark:hover:text-neutral-200 hover:bg-slate-50 dark:hover:bg-neutral-800 rounded-lg cursor-pointer"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <div className="py-4 space-y-3.5">
+                <p className="text-sm text-slate-600 dark:text-neutral-300">
+                  Are you sure you want to delete <span className="font-semibold text-slate-900 dark:text-neutral-100">"{deletingTx.description}"</span> transaction ?
+                </p>
+                <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-neutral-800">
+                  <button
+                    onClick={() => setDeletingTx(null)}
+                    className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 dark:border-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 rounded-xl text-xs font-semibold cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmDelete}
+                    className="px-4 py-2 bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white rounded-xl text-xs font-bold cursor-pointer transition-all"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}
