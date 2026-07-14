@@ -62,7 +62,7 @@ export default function Auth() {
             <Wallet className="h-6 w-6 text-white" />
           </div>
           <span className="font-sans font-bold text-xl tracking-tight bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">
-            SmartSpend
+            Smart Wallet
           </span>
         </div>
 
@@ -71,7 +71,7 @@ export default function Auth() {
             Automate and Optimize Your Financial Horizon
           </h2>
           <p className="text-slate-400 mt-4 leading-relaxed font-sans text-sm">
-            SmartSpend combines elegant analytics with server-side artificial intelligence to streamline expense tracking, category budgeting, and cash flows.
+            Smart Wallet combines elegant analytics with server-side artificial intelligence to streamline expense tracking, category budgeting, and cash flows.
           </p>
 
           <div className="mt-8 space-y-5">

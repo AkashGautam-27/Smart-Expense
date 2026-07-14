@@ -182,7 +182,7 @@ export default function Reports() {
       doc.setTextColor(255, 255, 255);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(22);
-      doc.text('SMARTSPEND WEALTH STATEMENT', leftMargin, 16);
+      doc.text('SMART WEALTH STATEMENT', leftMargin, 16);
       
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(10);
@@ -280,11 +280,11 @@ export default function Reports() {
       });
 
       // 5. Save the file
-      doc.save(`SmartSpend_Statement_${fromDate}_to_${toDate}.pdf`);
+      doc.save(`Smart_Wallet_Statement_${fromDate}_to_${toDate}.pdf`);
       triggerSuccess('Wealth PDF Statement generated and downloaded successfully!');
     } catch (err: any) {
       console.error(err);
-      alert('Failed to generate PDF: ' + err.message);
+      console.log('Failed to generate PDF: ' + err.message);
     }
   };
 
@@ -321,7 +321,7 @@ export default function Reports() {
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Wealth Ledger');
 
       // Save XLSX file
-      XLSX.writeFile(workbook, `SmartSpend_Report_${fromDate}_to_${toDate}.xlsx`);
+      XLSX.writeFile(workbook, `Smart_Wallet_Report_${fromDate}_to_${toDate}.xlsx`);
       triggerSuccess('Excel Spreadsheet exported and saved successfully!');
     } catch (err: any) {
       console.error(err);
@@ -349,7 +349,7 @@ export default function Reports() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.setAttribute('href', url);
-      link.setAttribute('download', `SmartSpend_Dump_${fromDate}_to_${toDate}.csv`);
+      link.setAttribute('download', `Smart_Wallet_Dump_${fromDate}_to_${toDate}.csv`);
       link.style.visibility = 'hidden';
       document.body.appendChild(link);
       link.click();

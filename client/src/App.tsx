@@ -311,7 +311,7 @@ function AppContent() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <Wallet className="h-5 w-5 text-indigo-600" />
-                    <span className="font-bold text-sm tracking-tight dark:text-white">SmartSpend</span>
+                    <span className="font-bold text-sm tracking-tight dark:text-white">Smart Wallet</span>
                   </div>
                   <button onClick={() => setIsMobileMenuOpen(false)} className="p-1 text-slate-400">
                     <X className="h-5 w-5" />
@@ -399,7 +399,7 @@ function AppContent() {
           </button>
           <div className="flex items-center gap-2">
             <Wallet className="h-5 w-5 text-indigo-650" />
-            <span className="font-bold text-sm tracking-tight dark:text-white">SmartSpend</span>
+            <span className="font-bold text-sm tracking-tight dark:text-white">Smart Wallet</span>
           </div>
           <div className="w-9 h-9"></div> {/* Empty spacer spacer */}
         </header>
