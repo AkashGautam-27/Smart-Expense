@@ -14,9 +14,21 @@ import adminRoutes from './routes/adminRoutes';
 
 const app = express();
 
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  'http://localhost:5173',
+  'http://localhost:3000'
+].filter(Boolean) as string[];
+
 // Standard middleware
 app.use(cors({
-  origin: true, // Allow frontend origin
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(cookieParser());
