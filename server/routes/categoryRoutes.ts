@@ -4,8 +4,8 @@ import {
   createCategory,
   updateCategory,
   deleteCategory
-} from '../controllers/categoryController';
-import { authenticateToken } from '../middleware/auth';
+} from '../controllers/categoryController.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = Router();
 

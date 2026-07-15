@@ -1,16 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { errorHandler } from './middleware/error';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { errorHandler } from './middleware/error.js';
 
 // Routes
-import authRoutes from './routes/authRoutes';
-import transactionRoutes from './routes/transactionRoutes';
-import budgetRoutes from './routes/budgetRoutes';
-import categoryRoutes from './routes/categoryRoutes';
-import analyticsRoutes from './routes/analyticsRoutes';
-import aiRoutes from './routes/aiRoutes';
-import adminRoutes from './routes/adminRoutes';
+import authRoutes from './routes/authRoutes.js';
+import transactionRoutes from './routes/transactionRoutes.js';
+import budgetRoutes from './routes/budgetRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import analyticsRoutes from './routes/analyticsRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -48,6 +53,16 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/admin', adminRoutes);
+
+// Serve static frontend in production
+if (process.env.NODE_ENV === 'production') {
+  const clientDistPath = path.resolve(__dirname, '../../dist');
+  app.use(express.static(clientDistPath));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
 
 // Centralized error handling
 app.use(errorHandler);

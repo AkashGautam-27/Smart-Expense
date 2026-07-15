@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getBudgets, setBudget, deleteBudget } from '../controllers/budgetController';
-import { authenticateToken } from '../middleware/auth';
-import { budgetValidator } from '../validators/budget';
+import { getBudgets, setBudget, deleteBudget } from '../controllers/budgetController.js';
+import { authenticateToken } from '../middleware/auth.js';
+import { budgetValidator } from '../validators/budget.js';
 
 const router = Router();
 

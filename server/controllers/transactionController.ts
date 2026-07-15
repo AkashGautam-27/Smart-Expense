@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { Transaction } from '../models/Transaction';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { Transaction } from '../models/Transaction.js';
 
 export async function getTransactions(
   req: AuthenticatedRequest,

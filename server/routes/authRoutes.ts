@@ -10,15 +10,15 @@ import {
   resetPassword,
   updateProfile,
   refreshToken
-} from '../controllers/authController';
-import { authenticateToken } from '../middleware/auth';
+} from '../controllers/authController.js';
+import { authenticateToken } from '../middleware/auth.js';
 import {
   registerValidator,
   loginValidator,
   verifyOtpValidator,
   forgotPasswordValidator,
   resetPasswordValidator
-} from '../validators/auth';
+} from '../validators/auth.js';
 
 const router = Router();
 

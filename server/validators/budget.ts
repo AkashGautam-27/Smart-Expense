@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-import { validateRequest } from './auth';
+import { validateRequest } from './auth.js';
 
 export const budgetValidator = [
   body('category')

@@ -1,9 +1,9 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { User } from '../models/User';
-import { Transaction } from '../models/Transaction';
-import { Budget } from '../models/Budget';
-import { Category } from '../models/Category';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { User } from '../models/User.js';
+import { Transaction } from '../models/Transaction.js';
+import { Budget } from '../models/Budget.js';
+import { Category } from '../models/Category.js';
 
 // Get list of all users
 export async function getUsers(

@@ -27,7 +27,7 @@ const categorySchema = new Schema({
 // Ensure categories are unique per user/type
 categorySchema.index({ userId: 1, name: 1, type: 1 }, { unique: true });
 
-import { wrapModel } from './fallbackDb';
+import { wrapModel } from './fallbackDb.js';
 
 const MongooseCategory = model('Category', categorySchema);
 export const Category = wrapModel('categories', MongooseCategory) as any;

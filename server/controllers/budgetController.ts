@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { Budget } from '../models/Budget';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { Budget } from '../models/Budget.js';
 
 export async function getBudgets(
   req: AuthenticatedRequest,

@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { Category } from '../models/Category';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { Category } from '../models/Category.js';
 
 // Default built-in categories in case database doesn't have any
 const DEFAULT_CATEGORIES = [

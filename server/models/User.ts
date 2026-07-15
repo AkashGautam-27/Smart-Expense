@@ -112,7 +112,7 @@ userSchema.methods.comparePassword = async function (password: string): Promise<
   return bcryptjs.compare(password, this.password);
 };
 
-import { wrapModel } from './fallbackDb';
+import { wrapModel } from './fallbackDb.js';
 
 const MongooseUser = model<IUser>('User', userSchema);
 export const User = wrapModel('users', MongooseUser) as any;

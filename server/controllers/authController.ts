@@ -1,8 +1,8 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { User } from '../models/User';
-import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt';
-import { sendOTPEmail, sendResetPasswordEmail } from '../services/email';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { User } from '../models/User.js';
+import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt.js';
+import { sendOTPEmail, sendResetPasswordEmail } from '../services/email.js';
 import crypto from 'crypto';
 
 // Generate a random 6-digit numeric OTP

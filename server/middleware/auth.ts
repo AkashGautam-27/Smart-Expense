@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { verifyAccessToken } from '../utils/jwt';
-import { User } from '../models/User';
+import { verifyAccessToken } from '../utils/jwt.js';
+import { User } from '../models/User.js';
 
 export interface AuthenticatedRequest extends Request {
   userId?: string;

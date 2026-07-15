@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
-import { AuthenticatedRequest } from '../middleware/auth';
-import { Transaction } from '../models/Transaction';
-import { Budget } from '../models/Budget';
+import { AuthenticatedRequest } from '../middleware/auth.js';
+import { Transaction } from '../models/Transaction.js';
+import { Budget } from '../models/Budget.js';
 import mongoose from 'mongoose';
 
 export async function getDashboardStats(

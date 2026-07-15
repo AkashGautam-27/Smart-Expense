@@ -41,7 +41,7 @@ const budgetSchema = new Schema({
 // Ensure a user can only have one budget per category
 budgetSchema.index({ userId: 1, category: 1 }, { unique: true });
 
-import { wrapModel } from './fallbackDb';
+import { wrapModel } from './fallbackDb.js';
 
 const MongooseBudget = model('Budget', budgetSchema);
 export const Budget = wrapModel('budgets', MongooseBudget) as any;

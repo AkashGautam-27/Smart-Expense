@@ -5,9 +5,9 @@ import {
   createTransaction,
   updateTransaction,
   deleteTransaction
-} from '../controllers/transactionController';
-import { authenticateToken } from '../middleware/auth';
-import { transactionValidator } from '../validators/transaction';
+} from '../controllers/transactionController.js';
+import { authenticateToken } from '../middleware/auth.js';
+import { transactionValidator } from '../validators/transaction.js';
 
 const router = Router();
 

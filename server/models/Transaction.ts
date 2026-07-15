@@ -60,7 +60,7 @@ const transactionSchema = new Schema({
 // Create compound index for fast queries
 transactionSchema.index({ userId: 1, date: -1 });
 
-import { wrapModel } from './fallbackDb';
+import { wrapModel } from './fallbackDb.js';
 
 const MongooseTransaction = model('Transaction', transactionSchema);
 export const Transaction = wrapModel('transactions', MongooseTransaction) as any;
