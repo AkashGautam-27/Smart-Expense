@@ -21,6 +21,8 @@ const app = express();
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
+  'https://smart-expense-pink.vercel.app',
+  'https://smart-expense-pink.vercel.app/api/auth/login',
   'http://localhost:5173',
   'http://localhost:3000'
 ].filter(Boolean) as string[];
