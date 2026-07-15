@@ -56,7 +56,7 @@ app.use('/api/admin', adminRoutes);
 
 // Serve static frontend in production
 if (process.env.NODE_ENV === 'production') {
-  const clientDistPath = path.resolve(__dirname, '../../dist');
+  const clientDistPath = path.resolve(__dirname, '../../client/dist');
   app.use(express.static(clientDistPath));
 
   app.get('*', (req, res) => {
